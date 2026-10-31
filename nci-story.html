@@ -6,10 +6,6 @@
   <title>Many-Body Interactions | Sharon Ochieng</title>
   <meta name="description" content="Research highlight: benchmarking three-body noncovalent interactions and predicting iodine systems with physics-informed machine learning.">
   <link rel="stylesheet" href="style.css">
-  <style>
-    .pdf-frame { width: 100%; aspect-ratio: 16 / 9; border: 1px solid var(--line); border-radius: 8px; background: #fff; display: block; }
-    .pdf-note { font-size: 14px; color: var(--muted); margin-top: 10px; }
-  </style>
 </head>
 <body>
 
@@ -18,8 +14,7 @@
     <a class="brand" href="index.html">Sharon Ochieng</a>
     <nav class="nav" aria-label="Main">
       <a href="index.html#about">About</a>
-      <a href="index.html#projects">Projects</a>
-      <a href="index.html#research" aria-current="page">Research</a>
+      <a href="index.html#artifacts" aria-current="page">Projects</a>
       <a href="index.html#contact">Contact</a>
     </nav>
   </div>
@@ -28,7 +23,7 @@
 <main>
   <div class="artifact-hero">
     <div class="wrap">
-      <div class="crumb"><a href="index.html#research">&larr; Research highlights</a></div>
+      <div class="crumb"><a href="index.html#artifacts">&larr; All projects</a></div>
       <p class="eyebrow">Research highlight · PhD work</p>
       <h1>From Three Molecules to Materials and Catalysts</h1>
       <p>How many-body noncovalent interactions are benchmarked, explained, and predicted, and why it matters for crystals and catalysis.</p>
@@ -38,14 +33,17 @@
   <section>
     <div class="wrap">
       <!-- VISUAL -->
-      <div class="viewer">
-        <object class="pdf-frame" data="NCI_Story.pdf#view=FitH" type="application/pdf" aria-label="Four-slide presentation on many-body noncovalent interactions">
-          <p style="padding:24px">Your browser cannot display the slides here. <a href="NCI_Story.pdf" target="_blank" rel="noopener">Open the slides (PDF)</a>.</p>
-        </object>
+      <div class="viewer" id="viewer">
+        <div class="stage"><img id="slide" src="nci-slide-01.jpg" alt="Slide 1 of 4"></div>
+        <div class="controls">
+          <button type="button" id="prev" aria-label="Previous slide">&larr; Previous</button>
+          <span class="count" id="count" aria-live="polite">Slide 1 of 4</span>
+          <button type="button" id="next" aria-label="Next slide">Next &rarr;</button>
+        </div>
+        <div class="thumbs" id="thumbs" aria-label="All slides"></div>
       </div>
-      <p class="pdf-note">Scroll inside the viewer to move through the four slides.</p>
       <div class="downloads">
-        <a class="btn btn-primary" href="NCI_Story.pdf" target="_blank" rel="noopener">Open slides in a new tab (PDF)</a>
+        <a class="btn btn-primary" href="NCI_Story.pdf" target="_blank" rel="noopener">Open full slides (PDF)</a>
       </div>
 
       <div style="margin-top:48px">
@@ -130,7 +128,7 @@
       </div>
 
       <div class="btns" style="margin-top:36px">
-        <a class="btn btn-light" href="index.html#research">&larr; Back to research highlights</a>
+        <a class="btn btn-light" href="index.html#artifacts">&larr; Back to all projects</a>
       </div>
     </div>
   </section>
@@ -143,5 +141,32 @@
   </div>
 </footer>
 
+<script>
+  (function () {
+    var total = 4, i = 0;
+    var img = document.getElementById('slide'), count = document.getElementById('count'), thumbs = document.getElementById('thumbs');
+    var src = function (n) { return 'nci-slide-' + String(n + 1).padStart(2, '0') + '.jpg'; };
+    for (var n = 0; n < total; n++) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('aria-label', 'Go to slide ' + (n + 1));
+      b.innerHTML = '<img src="' + src(n) + '" alt="" loading="lazy">';
+      b.addEventListener('click', (function (k) { return function () { show(k); }; })(n));
+      thumbs.appendChild(b);
+    }
+    function show(n) {
+      i = (n + total) % total;
+      img.src = src(i); img.alt = 'Slide ' + (i + 1) + ' of ' + total;
+      count.textContent = 'Slide ' + (i + 1) + ' of ' + total;
+      Array.prototype.forEach.call(thumbs.children, function (t, k) { t.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+    }
+    document.getElementById('prev').addEventListener('click', function () { show(i - 1); });
+    document.getElementById('next').addEventListener('click', function () { show(i + 1); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') show(i - 1);
+      if (e.key === 'ArrowRight') show(i + 1);
+    });
+    show(0);
+  })();
+</script>
 </body>
 </html>
