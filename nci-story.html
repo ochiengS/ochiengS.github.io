@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Many-Body Interactions | Sharon Ochieng</title>
+  <meta name="description" content="Research highlight: benchmarking three-body noncovalent interactions and predicting iodine systems with physics-informed machine learning.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .pdf-frame { width: 100%; aspect-ratio: 16 / 9; border: 1px solid var(--line); border-radius: 8px; background: #fff; display: block; }
+    .pdf-note { font-size: 14px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Sharon Ochieng</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html#about">About</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#research" aria-current="page">Research</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="artifact-hero">
+    <div class="wrap">
+      <div class="crumb"><a href="index.html#research">&larr; Research highlights</a></div>
+      <p class="eyebrow">Research highlight · PhD work</p>
+      <h1>From Three Molecules to Materials and Catalysts</h1>
+      <p>How many-body noncovalent interactions are benchmarked, explained, and predicted, and why it matters for crystals and catalysis.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <!-- VISUAL -->
+      <div class="viewer">
+        <object class="pdf-frame" data="NCI_Story.pdf#view=FitH" type="application/pdf" aria-label="Four-slide presentation on many-body noncovalent interactions">
+          <p style="padding:24px">Your browser cannot display the slides here. <a href="NCI_Story.pdf" target="_blank" rel="noopener">Open the slides (PDF)</a>.</p>
+        </object>
+      </div>
+      <p class="pdf-note">Scroll inside the viewer to move through the four slides.</p>
+      <div class="downloads">
+        <a class="btn btn-primary" href="NCI_Story.pdf" target="_blank" rel="noopener">Open slides in a new tab (PDF)</a>
+      </div>
+
+      <div style="margin-top:48px">
+        <!-- TITLE -->
+        <div class="entry">
+          <div class="label">Title</div>
+          <div>
+            <h3>From Three Molecules to Materials and Catalysts</h3>
+            <p>A four-slide summary of my doctoral research on three-body noncovalent interactions (NCIs). It follows one question across three projects: the 3BHET benchmark of diverse molecular trimers, the 3BXB study of halogen-bonded trimers, and a physics-informed machine learning model that predicts expensive iodine systems. It closes with what this means for crystal structure prediction and catalysis.</p>
+          </div>
+        </div>
+
+        <!-- OBJECTIVE -->
+        <div class="entry">
+          <div class="label">Objective</div>
+          <div>
+            <p>Most computational models build molecular interactions from pairs, but some of the energy only appears when three molecules interact at once. I wanted to know which quantum chemistry methods capture this three-body energy correctly, why some fail, and whether machine learning could predict it for systems too expensive to compute directly.</p>
+            <p>I condensed a full research seminar into four slides to show that the story can be told clearly to a non-specialist audience.</p>
+          </div>
+        </div>
+
+        <!-- PROCESS -->
+        <div class="entry">
+          <div class="label">Process</div>
+          <div>
+            <ol>
+              <li><strong>Benchmark (3BHET):</strong> built a set of 10 chemically diverse trimers, computed CCSD(T)/CBS reference energies, and tested cheaper methods (MP2, DFT, and the SAPT family) against them. SAPT2+(3) gave the best total interaction energies, and three-body dispersion proved to be where methods disagree most.</li>
+              <li><strong>Isolate one interaction (3BXB):</strong> extended a halogen-bond dimer set into 214 trimers with chlorine, bromine, and iodine donors to see how three-body effects change with halogen polarizability.</li>
+              <li><strong>Predict the expensive case:</strong> because iodine is the most costly to compute, I trained machine learning models on chlorine and bromine and predicted iodine, which the models never saw. The model starts from the Axilrod&ndash;Teller&ndash;Muto (ATM) dispersion formula and learns only the correction (&Delta;-learning). Models were chosen by how well they transferred between halogens, not by training accuracy.</li>
+              <li><strong>Communicate:</strong> condensed the work into four slides in LaTeX Beamer, using a consistent visual story from problem to impact.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- TOOLS -->
+        <div class="entry">
+          <div class="label">Tools</div>
+          <div>
+            <div class="tools">
+              <span>Molpro</span>
+              <span>Psi4</span>
+              <span>Q-Chem</span>
+              <span>Gaussian</span>
+              <span>Python machine learning (KRR, GPR, random forests, gradient boosting)</span>
+              <span>High-performance computing</span>
+              <span>LaTeX (Beamer, TikZ)</span>
+              <span>Claude (Anthropic) for slide drafting</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- VALUE -->
+        <div class="entry">
+          <div class="label">Value</div>
+          <div>
+            <div class="value-box">For <strong>research and data science teams</strong>, this project shows how to make machine learning trustworthy in a high-stakes setting: benchmark against the best available reference first, build physics into the model, and test it on data it has never seen. The same recipe applies wherever accurate data is expensive, from designing new crystalline materials to screening catalysts.</div>
+          </div>
+        </div>
+
+        <!-- KEY INSIGHTS -->
+        <div class="entry">
+          <div class="label">Key insights</div>
+          <div>
+            <ul>
+              <li>Three-body effects are real and method-sensitive; adding up pairs is not enough.</li>
+              <li>Starting from known physics and learning only the correction makes models extrapolate more reliably to new chemistry.</li>
+              <li>Choosing models by transferability, not training fit, guards against models that look good but do not generalize.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- SOURCES -->
+        <div class="entry">
+          <div class="label">Publications</div>
+          <div>
+            <ul class="sources">
+              <li>Ochieng, S. A., &amp; Patkowski, K. (2023). <em>Physical Chemistry Chemical Physics, 25</em>, 28621&ndash;28637 (3BHET).</li>
+              <li>Ochieng, S. A., &amp; Patkowski, K. (2025). <a href="https://arxiv.org/abs/2507.17619" target="_blank" rel="noopener">arXiv:2507.17619</a> (3BXB).</li>
+              <li>K&#345;&iacute;&#382;, K., &amp; &#344;ez&aacute;&#269;, J. (2022). <em>Physical Chemistry Chemical Physics, 24</em>, 14794 (halogen-bond dimer set used to build 3BXB).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="btns" style="margin-top:36px">
+        <a class="btn btn-light" href="index.html#research">&larr; Back to research highlights</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 Sharon Ochieng</span>
+    <span>Built with HTML and CSS, hosted on GitHub Pages</span>
+  </div>
+</footer>
+
+</body>
+</html>
