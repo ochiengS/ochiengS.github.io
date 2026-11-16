@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ML or Deep Learning? | Sharon Ochieng</title>
+  <meta name="description" content="Project 4: a decision guide for choosing between traditional machine learning and deep learning, built from two case studies: house price prediction and facial recognition.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .guide { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 22px; }
+    .guide h3 { margin: 0 0 4px; }
+    .q { margin-top: 18px; }
+    .q p { margin: 0 0 8px; font-weight: 600; }
+    .opts { display: flex; flex-wrap: wrap; gap: 8px; }
+    .opts button { font: inherit; font-size: 15px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--mist); color: var(--ink); cursor: pointer; }
+    .opts button[aria-pressed="true"] { background: var(--teal); border-color: var(--teal); color: #fff; }
+    .result { margin-top: 20px; padding: 14px 16px; border-radius: 8px; background: var(--mist); border-left: 4px solid var(--teal); min-height: 24px; }
+    .result.dl { border-left-color: var(--amber); }
+    .cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .case { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+    .case .pill { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #fff; background: var(--teal); padding: 3px 10px; border-radius: 999px; }
+    .case.dl .pill { background: var(--amber); }
+    .case h4 { margin: 10px 0 6px; font-size: 18px; }
+    .case p { margin: 6px 0; font-size: 15px; }
+    .tbl { width: 100%; border-collapse: collapse; font-size: 15px; margin-top: 8px; }
+    .tbl th, .tbl td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .tbl th { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+    .tbl-wrap { overflow-x: auto; }
+    .muted { font-size: 14px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Sharon Ochieng</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html#about">About</a>
+      <a href="index.html#artifacts" aria-current="page">Projects</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="artifact-hero">
+    <div class="wrap">
+      <div class="crumb"><a href="index.html#artifacts">&larr; All projects</a></div>
+      <p class="eyebrow">Project 4 · AI solution selection · AIML-500</p>
+      <h1>Machine Learning or Deep Learning? A Decision Guide for AI Projects</h1>
+      <p>Choosing the right approach is a decision about the problem, not about which technique is newer. Two case studies show how to decide.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <!-- VISUAL: interactive decision guide -->
+      <div class="guide" id="guide">
+        <h3>Try it: which approach fits your problem?</h3>
+        <p class="muted" style="margin-top:0">Answer three questions about a project you have in mind.</p>
+        <div class="q" data-q="data">
+          <p>1. What does your data look like?</p>
+          <div class="opts">
+            <button type="button" data-v="ml" aria-pressed="false">Rows and columns (spreadsheet, database)</button>
+            <button type="button" data-v="dl" aria-pressed="false">Raw images, audio, or free text</button>
+          </div>
+        </div>
+        <div class="q" data-q="size">
+          <p>2. How many labeled examples do you have?</p>
+          <div class="opts">
+            <button type="button" data-v="ml" aria-pressed="false">Hundreds to thousands</button>
+            <button type="button" data-v="dl" aria-pressed="false">Hundreds of thousands or more</button>
+          </div>
+        </div>
+        <div class="q" data-q="explain">
+          <p>3. Must you explain each decision to the people affected?</p>
+          <div class="opts">
+            <button type="button" data-v="ml" aria-pressed="false">Yes, clearly</button>
+            <button type="button" data-v="dl" aria-pressed="false">Accuracy matters more</button>
+          </div>
+        </div>
+        <div class="result" id="result" aria-live="polite">Your recommendation will appear here.</div>
+      </div>
+      <p class="muted">A rule of thumb, not a substitute for testing. In practice, teams compare a simple baseline with more complex models on held-out data.</p>
+
+      <div style="margin-top:48px">
+        <!-- TITLE -->
+        <div class="entry">
+          <div class="label">Title</div>
+          <div>
+            <h3>Machine Learning or Deep Learning? A Decision Guide for AI Projects</h3>
+            <p>A comparison of traditional machine learning (ML) and deep learning (DL) through two real-world case studies: predicting house prices with linear regression, and recognizing faces with a convolutional neural network. I adapted my course report into a short guide and an interactive checklist that decision makers can apply to their own projects.</p>
+          </div>
+        </div>
+
+        <!-- OBJECTIVE -->
+        <div class="entry">
+          <div class="label">Objective</div>
+          <div>
+            <p>Many organizations assume the newest, most complex AI is always the best choice. In my experience, that leads to expensive models that are hard to explain and no more accurate than simpler ones. My goal was to show, with concrete examples, how the type of data, the amount of data, and the need for explanation should drive the choice.</p>
+          </div>
+        </div>
+
+        <!-- CASE STUDIES -->
+        <div class="entry">
+          <div class="label">Case studies</div>
+          <div>
+            <div class="cases">
+              <div class="case">
+                <span class="pill">Machine learning</span>
+                <h4>House price prediction</h4>
+                <p><strong>Approach:</strong> linear regression on features such as bedrooms, square footage, and neighborhood.</p>
+                <p><strong>Why it fits:</strong> the data is a structured table, experts already know which features matter, a few thousand sales are enough, and each coefficient can be explained to a homeowner, lender, or tax assessor.</p>
+                <p><strong>Why not deep learning:</strong> too little data, no hidden patterns in raw signals to discover, and a black-box answer is hard to defend. Tree-based models still often beat deep learning on typical tabular data (Grinsztajn et al., 2022).</p>
+              </div>
+              <div class="case dl">
+                <span class="pill">Deep learning</span>
+                <h4>Facial recognition</h4>
+                <p><strong>Approach:</strong> a convolutional neural network learning directly from pixels.</p>
+                <p><strong>Why it fits:</strong> one 224 &times; 224 color image holds 150,528 numbers with no meaning on their own. The network learns edges, then shapes, then identities (LeCun et al., 2015), and large labeled image sets exist.</p>
+                <p><strong>Why not traditional ML:</strong> hand-measured features like eye distance break when lighting, angle, or expression changes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COMPARISON -->
+        <div class="entry">
+          <div class="label">Comparison</div>
+          <div>
+            <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th>Factor</th><th>House prices (ML)</th><th>Facial recognition (DL)</th></tr></thead>
+              <tbody>
+                <tr><td>Type of data</td><td>Structured table of known features</td><td>Raw, unstructured pixels</td></tr>
+                <tr><td>Who defines features</td><td>People</td><td>The network learns them</td></tr>
+                <tr><td>Amount of data</td><td>Thousands of sales are enough</td><td>Large labeled image collections</td></tr>
+                <tr><td>Computing needs</td><td>Low; trains in seconds</td><td>High; graphics processors</td></tr>
+                <tr><td>Explainability</td><td>High; each coefficient has a meaning</td><td>Low; works as a black box</td></tr>
+                <tr><td>Main risk</td><td>Missing nonlinear relationships</td><td>Bias, privacy, lack of transparency</td></tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROCESS -->
+        <div class="entry">
+          <div class="label">Process</div>
+          <div>
+            <ol>
+              <li><strong>Analyze:</strong> studied each example from the course lesson and identified the deciding factors: data type, data volume, computing cost, and explainability.</li>
+              <li><strong>Argue both sides:</strong> for each case, explained why the chosen approach fits <em>and</em> why the other one would fail, which is a stronger test than listing advantages.</li>
+              <li><strong>Verify with research:</strong> supported the claims with peer-reviewed sources, including a NIST evaluation of demographic effects in face recognition.</li>
+              <li><strong>Adapt for the audience:</strong> turned a 6-page academic report into a scannable guide and an interactive three-question checklist for managers and project leads.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- TOOLS -->
+        <div class="entry">
+          <div class="label">Tools</div>
+          <div>
+            <div class="tools">
+              <span>Comparative analysis</span>
+              <span>Linear regression concepts</span>
+              <span>Convolutional neural networks</span>
+              <span>APA research writing</span>
+              <span>HTML, CSS, and JavaScript</span>
+              <span>Claude (Anthropic) for research support and drafting</span>
+            </div>
+            <p class="muted">I used generative AI to help research, draft, and format the original report and this page. I reviewed the content and verified the sources.</p>
+          </div>
+        </div>
+
+        <!-- VALUE -->
+        <div class="entry">
+          <div class="label">Value</div>
+          <div>
+            <div class="value-box">For <strong>managers and teams planning an AI investment</strong>, this guide helps avoid a costly mistake: choosing deep learning when a simpler, cheaper, and more explainable model would do the job. It shows that I can match an AI technique to a business problem and explain the trade-offs in plain language.</div>
+          </div>
+        </div>
+
+        <!-- KEY INSIGHTS -->
+        <div class="entry">
+          <div class="label">Key insights</div>
+          <div>
+            <ul>
+              <li>Start with the simplest model that fits the data and the need for explanation.</li>
+              <li>Move to deep learning only when the data is unstructured, plentiful, and too complex for human-designed features.</li>
+              <li>Powerful models bring responsibilities: a U.S. government evaluation found that many face recognition algorithms had higher error rates for some demographic groups (Grother et al., 2019), so testing for bias and keeping humans in high-stakes decisions is essential.</li>
+              <li>My own research followed the same principle: with limited, expensive data, I built known physics into smaller machine learning models instead of reaching for the largest network.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- SOURCES -->
+        <div class="entry">
+          <div class="label">Sources</div>
+          <div>
+            <ul class="sources">
+              <li>Grinsztajn, L., Oyallon, E., &amp; Varoquaux, G. (2022). Why do tree-based models still outperform deep learning on typical tabular data? <em>Advances in Neural Information Processing Systems, 35</em>, 507&ndash;520.</li>
+              <li>Grother, P., Ngan, M., &amp; Hanaoka, K. (2019). <em>Face recognition vendor test (FRVT) part 3: Demographic effects</em> (NISTIR 8280). NIST. <a href="https://doi.org/10.6028/NIST.IR.8280" target="_blank" rel="noopener">https://doi.org/10.6028/NIST.IR.8280</a></li>
+              <li>LeCun, Y., Bengio, Y., &amp; Hinton, G. (2015). Deep learning. <em>Nature, 521</em>(7553), 436&ndash;444. <a href="https://doi.org/10.1038/nature14539" target="_blank" rel="noopener">https://doi.org/10.1038/nature14539</a></li>
+              <li>Taigman, Y., Yang, M., Ranzato, M., &amp; Wolf, L. (2014). DeepFace: Closing the gap to human-level performance in face verification. <em>Proceedings of IEEE CVPR</em>, 1701&ndash;1708.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="btns" style="margin-top:36px">
+        <a class="btn btn-light" href="index.html#artifacts">&larr; Back to all projects</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 Sharon Ochieng</span>
+    <span>Built with HTML and CSS, hosted on GitHub Pages</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var answers = {};
+    var result = document.getElementById('result');
+    document.querySelectorAll('#guide .q').forEach(function (q) {
+      q.querySelectorAll('button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          q.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+          answers[q.dataset.q] = b.dataset.v;
+          update();
+        });
+      });
+    });
+    function update() {
+      var n = Object.keys(answers).length;
+      if (n < 3) { result.className = 'result'; result.textContent = 'Answer ' + (3 - n) + ' more question' + (n === 2 ? '' : 's') + ' to see a recommendation.'; return; }
+      var dl = ['data', 'size', 'explain'].filter(function (k) { return answers[k] === 'dl'; }).length;
+      if (answers.data === 'ml' && dl <= 1) {
+        result.className = 'result';
+        result.innerHTML = '<strong>Start with traditional machine learning.</strong> Structured data works well with models like linear regression or decision trees: they are cheaper, faster, and easier to explain, like the house price case.';
+      } else if (answers.data === 'dl' && answers.size === 'dl') {
+        result.className = 'result dl';
+        result.innerHTML = '<strong>Deep learning is a strong candidate.</strong> Raw, plentiful data is where neural networks shine, like the facial recognition case.' + (answers.explain === 'ml' ? ' Because you need to explain decisions, plan for interpretability tools, bias testing, and human review.' : ' Still test for bias and keep people involved in high-stakes decisions.');
+      } else if (answers.data === 'dl') {
+        result.className = 'result dl';
+        result.innerHTML = '<strong>Deep learning, with care.</strong> Raw images or text usually need neural networks, but with limited data, consider fine-tuning a pretrained model rather than training from scratch.';
+      } else {
+        result.className = 'result';
+        result.innerHTML = '<strong>Start with traditional machine learning, then compare.</strong> Your data is structured, so a simpler model is the right baseline. Try a more complex model only if it clearly beats the baseline on held-out data.';
+      }
+    }
+  })();
+</script>
+</body>
+</html>
